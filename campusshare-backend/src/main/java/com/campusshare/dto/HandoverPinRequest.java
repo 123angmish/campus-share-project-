@@ -1,0 +1,3 @@
+package com.campusshare.dto;
+import jakarta.validation.constraints.NotBlank; import jakarta.validation.constraints.Pattern; import lombok.Data;
+@Data public class HandoverPinRequest { @NotBlank @Pattern(regexp="^[0-9]{6}$") private String pin; }

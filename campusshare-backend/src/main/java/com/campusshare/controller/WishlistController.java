@@ -1,0 +1,8 @@
+package com.campusshare.controller;
+import com.campusshare.dto.ItemResponse; import com.campusshare.model.*; import com.campusshare.repository.*; import com.campusshare.security.UserPrincipal; import lombok.RequiredArgsConstructor; import org.springframework.http.ResponseEntity; import org.springframework.security.core.annotation.AuthenticationPrincipal; import org.springframework.web.bind.annotation.*; import java.util.*;
+@RestController @RequestMapping("/api/wishlist") @RequiredArgsConstructor public class WishlistController { private final WishlistRepository wishlist; private final UserRepository users; private final ItemRepository items;
+@GetMapping public List<ItemResponse> list(@AuthenticationPrincipal UserPrincipal u){return wishlist.findByUserIdOrderByCreatedAtDesc(u.getId()).stream().map(x->ItemResponse.fromItem(x.getItem())).toList();}
+@GetMapping("/{itemId}/status") public Map<String,Boolean> status(@PathVariable Long itemId,@AuthenticationPrincipal UserPrincipal u){if(u==null) return Map.of("saved",false); return Map.of("saved",wishlist.existsByUserIdAndItemId(u.getId(),itemId));}
+@PostMapping("/{itemId}") public ResponseEntity<?> add(@PathVariable Long itemId,@AuthenticationPrincipal UserPrincipal u){if(!wishlist.existsByUserIdAndItemId(u.getId(),itemId)){wishlist.save(WishlistItem.builder().user(users.findById(u.getId()).orElseThrow()).item(items.findById(itemId).orElseThrow()).build());}return ResponseEntity.ok(Map.of("saved",true));}
+@DeleteMapping("/{itemId}") public ResponseEntity<?> remove(@PathVariable Long itemId,@AuthenticationPrincipal UserPrincipal u){wishlist.findByUserIdAndItemId(u.getId(),itemId).ifPresent(wishlist::delete);return ResponseEntity.ok(Map.of("saved",false));}
+}

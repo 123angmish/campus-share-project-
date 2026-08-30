@@ -1,0 +1,69 @@
+# ===========================
+# Backend / Maven
+# ===========================
+campusshare-backend/target/
+campusshare-backend/.idea/
+campusshare-backend/*.iml
+campusshare-backend/.classpath
+campusshare-backend/.project
+campusshare-backend/.settings/
+campusshare-backend/bin/
+
+# ===========================
+# Frontend / Node
+# ===========================
+campusshare-frontend/node_modules/
+campusshare-frontend/dist/
+campusshare-frontend/build/
+campusshare-frontend/.cache/
+campusshare-frontend/npm-debug.log*
+campusshare-frontend/yarn-debug.log*
+campusshare-frontend/yarn-error.log*
+
+# ===========================
+# Secrets / local overrides
+# ===========================
+.env
+.env.*
+!.env.example
+campusshare-backend/src/main/resources/application-local.yml
+
+# ===========================
+# Database / logs / OS / IDE
+# ===========================
+*.sql.backup
+*.dump
+postgres-data/
+*.log
+logs/
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+*.swp
+*.swo
+*~
+
+# ===========================
+# Temporary / generated
+# ===========================
+*.tmp
+*.temp
+*.cache
+uploads/
+campusshare-backend/uploads/
+coverage/
+.nyc_output/
+junit/
+test-results/
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar

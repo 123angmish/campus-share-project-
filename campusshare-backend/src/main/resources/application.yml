@@ -1,0 +1,74 @@
+spring:
+  application:
+    name: campusshare-backend
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:h2:file:${user.home}/.campusshare/campussharedb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE}
+    username: ${SPRING_DATASOURCE_USERNAME:sa}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER:org.h2.Driver}
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  flyway:
+    enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
+    open-in-view: false
+    show-sql: false
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+server:
+  port: ${PORT:8080}
+  error:
+    include-message: never
+jwt:
+  secret: ${JWT_SECRET:campusshare-local-development-secret-key-minimum-256-bits-change-me-safely}
+  expiration: ${JWT_EXPIRATION:900000}
+  refresh-expiration: ${JWT_REFRESH_EXPIRATION:2592000000}
+email:
+  allowed-domains: ${ALLOWED_EMAIL_DOMAINS:*,gmail.com,yahoo.com,outlook.com,college.edu,university.edu,student.edu,banasthali.in}
+razorpay:
+  key-id: ${RAZORPAY_KEY_ID:}
+  key-secret: ${RAZORPAY_KEY_SECRET:}
+  webhook-secret: ${RAZORPAY_WEBHOOK_SECRET:}
+  webhook-max-attempts: ${RAZORPAY_WEBHOOK_MAX_ATTEMPTS:5}
+  webhook-recovery-ms: ${RAZORPAY_WEBHOOK_RECOVERY_MS:30000}
+app:
+  frontend-url: ${FRONTEND_URL:http://localhost:3000}
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174}
+  auth:
+    require-email-verification: ${AUTH_REQUIRE_EMAIL_VERIFICATION:false}
+    refresh-cookie-name: ${REFRESH_COOKIE_NAME:campusshare_refresh}
+    refresh-cookie-secure: ${REFRESH_COOKIE_SECURE:false}
+    refresh-cookie-same-site: ${REFRESH_COOKIE_SAME_SITE:Lax}
+  mail-enabled: ${MAIL_ENABLED:false}
+  demo-seed-enabled: ${DEMO_SEED_ENABLED:false}
+  demo-password: ${DEMO_PASSWORD:}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    mail:
+      enabled: ${MAIL_ENABLED:false}
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
