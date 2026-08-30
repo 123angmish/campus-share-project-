@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import api from '../config/api';
@@ -344,7 +344,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchItems(0, false);
-  }, [category, condition, listingType, sortBy, sortDir]);
+  }, [category, condition, listingType, sortBy, sortDir, fetchItems]);
 
   useEffect(() => {
     if (!user) {

@@ -40,7 +40,8 @@ export default function Signup() {
 
     setLoading(true);
     setError('');
-    const { confirmPassword, ...payload } = formData;
+    const payload = { ...formData };
+    delete payload.confirmPassword;
     const r = await signup({ ...payload, year: Number(formData.year) });
     setLoading(false);
     if (r.success) {

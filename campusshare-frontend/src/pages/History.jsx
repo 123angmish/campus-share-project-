@@ -174,16 +174,6 @@ export default function History() {
     }
   };
 
-  const handleShareContact = async (id) => {
-    try {
-      await api.post(`/rentals/${id}/share-contact`);
-      alert('📱 Your contact details were shared with the other student!');
-      await load();
-    } catch (err) {
-      alert(apiMessage(err, 'Could not share contact details'));
-    }
-  };
-
   const submitMeeting = async (e) => {
     e.preventDefault();
     try {
@@ -195,37 +185,6 @@ export default function History() {
       alert(apiMessage(err, 'Could not propose meeting'));
     } finally {
       setSubmittingMeeting(false);
-    }
-  };
-
-  const handleConfirmMeeting = async (id) => {
-    try {
-      await api.post(`/rentals/${id}/confirm-meeting`);
-      alert('🤝 Meeting confirmed!');
-      await load();
-    } catch (err) {
-      alert(apiMessage(err, 'Could not confirm meeting'));
-    }
-  };
-
-  const handleMarkPaid = async (id, method) => {
-    try {
-      await api.post(`/rentals/${id}/mark-paid`, { paymentMethod: method });
-      alert(`💰 Marked as paid via ${method}. The seller will verify and confirm.`);
-      await load();
-    } catch (err) {
-      alert(apiMessage(err, 'Could not record payment'));
-    }
-  };
-
-  const handleConfirmPayment = async (id) => {
-    if (!window.confirm('Confirm that you have received the payment from the student?')) return;
-    try {
-      await api.post(`/rentals/${id}/confirm-payment`);
-      alert('✅ Payment verified! You can now proceed to handover.');
-      await load();
-    } catch (err) {
-      alert(apiMessage(err, 'Could not confirm payment'));
     }
   };
 

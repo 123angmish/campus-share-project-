@@ -14,7 +14,6 @@ export default function Dashboard() {
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [withdrawUpi, setWithdrawUpi] = useState('');
   const [withdrawing, setWithdrawing] = useState(false);
-  const [payoutSuccessMsg, setPayoutSuccessMsg] = useState('');
 
   const handleWithdraw = async (e) => {
     e.preventDefault();
@@ -35,7 +34,6 @@ export default function Dashboard() {
           upiId: withdrawUpi.trim()
         }
       });
-      setPayoutSuccessMsg(res.data.message);
       setWithdrawModalOpen(false);
       setWithdrawAmount('');
       alert(`💸 Payout Successful!\n\n${res.data.message}\nRef: ${res.data.payoutReference}`);

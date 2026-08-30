@@ -113,7 +113,7 @@ api.interceptors.response.use(
         original.headers = original.headers || {};
         original.headers.Authorization = `Bearer ${session.accessToken}`;
         return api(original);
-      } catch (refreshError) {
+      } catch (_refreshError) {
         setAccessToken(null);
         setStoredUser(null);
         window.dispatchEvent(new Event('campusshare:session-expired'));

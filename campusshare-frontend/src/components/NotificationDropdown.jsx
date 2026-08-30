@@ -59,7 +59,9 @@ export default function NotificationDropdown() {
     try {
       const res = await api.get('/notifications/unread-count');
       setUnreadCount(res.data?.unreadCount || 0);
-    } catch {}
+    } catch (_err) {
+      // ignore unread fetch error when offline
+    }
   };
 
   const fetchList = async () => {
@@ -96,7 +98,9 @@ export default function NotificationDropdown() {
           prev.map((n) => (n.id === notif.id ? { ...n, read: true } : n))
         );
         setUnreadCount((c) => Math.max(0, c - 1));
-      } catch {}
+      } catch (_err) {
+        // ignore read status error
+      }
     }
     if (notif.link) {
       setOpen(false);
@@ -110,7 +114,9 @@ export default function NotificationDropdown() {
       await api.put('/notifications/read-all');
       setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
       setUnreadCount(0);
-    } catch {}
+    } catch (_err) {
+      // ignore mark all read error
+    }
   };
 
   // Close on outside click
