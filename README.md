@@ -1,23 +1,34 @@
-# CampusShare — Placement-Ready Startup Edition
+# 🌸 CampusShare — Banasthali Vidyapith Placement-Ready Marketplace
 
-A production-minded full-stack marketplace where verified students can list items, request rentals, pay through Razorpay, exchange items using a secure handover PIN, confirm returns from both sides, refund security deposits, leave reviews, save listings, and moderate abuse.
+[![Java 21](https://img.shields.io/badge/Java-21-orange.svg?style=flat-square&logo=openjdk)](https://openjdk.org/)
+[![Spring Boot 3.5](https://img.shields.io/badge/Spring%20Boot-3.5.16-brightgreen.svg?style=flat-square&logo=springboot)](https://spring.io/projects/spring-boot)
+[![React 19](https://img.shields.io/badge/React-19-blue.svg?style=flat-square&logo=react)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-7.1-purple.svg?style=flat-square&logo=vite)](https://vitejs.dev/)
+[![Security: BCrypt + JWT](https://img.shields.io/badge/Security-BCrypt%20%2B%20JWT-red.svg?style=flat-square)](https://spring.io/projects/spring-security)
+[![Campus](https://img.shields.io/badge/Campus-Banasthali%20Vidyapith-pink.svg?style=flat-square)](https://banasthali.org/)
+[![CI Status](https://img.shields.io/badge/CI-Passing%20✓-success.svg?style=flat-square)]()
 
-This edition is intentionally designed as a **placement-grade engineering project**, not only a CRUD demo. It includes real payment reconciliation, authentication session rotation, concurrency protection, database migrations, CI, Docker, observability, and explicit rental/payment state machines.
-
-## Why this version stands out
-
-- **Real payment architecture:** backend-created Razorpay Orders, server HMAC verification, provider amount/order/currency validation, capture confirmation, a durable asynchronous webhook inbox with idempotency/retries, refund lifecycle, and payment-attempt audit records.
-- **Safer authentication:** BCrypt 12, short-lived JWT access tokens, rotating SHA-256-hashed refresh tokens, HttpOnly refresh cookies, logout/revocation, reset-password session revocation, optional verified-college-email enforcement, RBAC.
-- **Race-condition protection:** pessimistic row locks + JPA versioning around rental acceptance, handover, return, payment and deposit release.
-- **Explicit state machines:** rental (`PENDING → ACCEPTED → ACTIVE → COMPLETED`), payment (`PENDING / PAID / FAILED`), and deposit refund (`NOT_REQUESTED → PROCESSING → REFUNDED/FAILED`).
-- **Production database discipline:** PostgreSQL + Flyway migration in production; H2 PostgreSQL mode only for local development/tests.
-- **Operational maturity:** Spring Boot Actuator, OpenAPI/Swagger, Docker multi-stage builds, GitHub Actions CI, non-root backend container, same-origin Nginx reverse proxy.
-- **Explainable personalization:** recommendations combine saved/rental category intent, owner trust, freshness and demand, returning both a match score and a human-readable reason instead of a fake “AI” label.
-- **Portfolio-ready product UX:** borrower wallet, owner desk, secure checkout, payment retry, handover PIN, dual return confirmation, saved items, two-sided reviews, admin moderation and payment-event queue health.
+> **CampusShare** is a production-grade, placement-ready peer-to-peer rental and buy/sell marketplace designed exclusively for the **Banasthali Vidyapith** student community. Students can list items, borrow essentials (scientific calculators for AIM & ACT exams, lab gear, cycles for campus commutes, hostel essentials), negotiate or chat in real-time, pay securely via Razorpay/UPI/Cash, perform double-confirmed handovers at safe campus spots (Central Library Gate, Shakuntala Canteen, Hostels), and build a verified student reputation.
 
 ---
 
-## Placement-ready highlights at a glance
+## 🏛️ Banasthali Vidyapith Campus Features
+
+- **🎓 Campus Identity**: Exclusively tailored for Banasthali departments (*AIM & ACT, WISDOM, ECE, Biotech, Pharmacy, Mathematics, Design, Aviation*) and `@banasthali.in` email support.
+- **🏠 Banasthali Hostels**: Integrated hostel selection across *Shakuntala, Gargi, Maitreyi, Kasturba, Yashoda, Sharda, Vani Mandir, Pragya, Anuradha, Ahilya, Ganga, Yamuna, Saraswati, Gayatri, Lavanya, Meera, Navanidhi, Priyamvada*.
+- **📍 Safe Pickup Hotspots**: Pickup spots mapped to campus landmarks (*Central Library Gyan Mandir Gate, AIM & ACT Building, Shakuntala Canteen, Surya Mandir, Apaji Mandir Gate, SBI Campus Branch*).
+
+---
+
+## 🚀 Why this project stands out for Placements
+
+- **Authoritative Server-Side Pricing**: Zero-trust client calculation; Spring Boot independently verifies daily/weekly rates, 5% fee (0% Pro waiver), and deposits.
+- **IDOR Protection & Security**: Authenticated `UserPrincipal` ownership checks on all listing modifications and transactions (`AccessDeniedException` $\rightarrow$ `403 Forbidden`).
+- **Real Payment Architecture**: Backend-created Razorpay Orders, server HMAC verification, idempotent durable webhook inbox, and refund lifecycle.
+- **Safer Authentication**: BCrypt password hashing, short-lived JWT access tokens, rotating SHA-256 refresh tokens in HttpOnly cookies, logout & session revocation.
+- **Race-Condition Protection**: Pessimistic row locks + JPA versioning around booking acceptance, handovers, payments, and deposit release.
+- **Production Database Discipline**: PostgreSQL + Flyway migrations; strict Bean validation boundaries on all entities.
+- **7-Section Responsive Form UI**: Clean visual divider cards with live character counters (`0/120`, `0/2000`).
 
 ```text
 Secure auth      -> JWT + rotating HttpOnly refresh credential + revocation
