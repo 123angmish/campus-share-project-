@@ -7,7 +7,7 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791.svg?style=flat-square&logo=postgresql)](https://www.postgresql.org/)
 [![Security: BCrypt + JWT](https://img.shields.io/badge/Security-BCrypt%20%2B%20JWT-red.svg?style=flat-square)](https://spring.io/projects/spring-security)
 [![Campus](https://img.shields.io/badge/Campus-Banasthali%20Vidyapith-pink.svg?style=flat-square)](https://banasthali.org/)
-[![CI Status](https://img.shields.io/badge/CI-Passing%20✓-success.svg?style=flat-square)]()
+[![CampusShare CI](https://github.com/123angmish/campus-share-project-/actions/workflows/ci.yml/badge.svg)](https://github.com/123angmish/campus-share-project-/actions/workflows/ci.yml)
 
 > **CampusShare** is a full-stack, placement-ready peer-to-peer rental and buy/sell marketplace tailored for the **Banasthali Vidyapith** university ecosystem. It allows students to list items, rent academic essentials (calculators, lab gear, bicycles, hostel utilities), manage rental lifecycles, process secure payments via Razorpay integration architecture, perform PIN-verified physical handovers at campus hotspots, and maintain an immutable ledger of transaction history.
 
@@ -18,7 +18,7 @@
 - **Concurrency-Safe Rental Booking**: Protects against race conditions and double-booking collisions by combining database pessimistic row locks (`SELECT ... FOR UPDATE`) during rental acceptance with JPA optimistic versioning on listings.
 - **Authoritative Server-Side Pricing Engine**: Zero-trust client calculation; Spring Boot independently computes and validates rental durations, daily rates, campus service fees, and refundable security deposits.
 - **Robust Payment Architecture**: Full Razorpay checkout lifecycle including server-created Razorpay Orders, HMAC-SHA256 signature verification, and an idempotent durable webhook inbox with asynchronous retry processing.
-- **Stateless Authentication with Token Rotation**: Short-lived JWT access tokens paired with rotating SHA-256 refresh tokens in secure HttpOnly cookies, full session revocation, and BCrypt password encryption.
+- **Stateless Authentication with Token Rotation**: Short-lived JWT access tokens paired with rotating SHA-256 refresh tokens in secure HttpOnly cookies, full session revocation, and BCrypt password hashing.
 - **Physical Trust & Double Confirmation**: 6-digit secure handover PIN revealed to the owner only upon captured payment, followed by mutual two-sided return confirmation to release security deposits.
 - **Production Database Discipline**: PostgreSQL 16 schema managed via Flyway versioned migrations (`V1__startup_schema.sql`) with strict Bean validation boundaries.
 
